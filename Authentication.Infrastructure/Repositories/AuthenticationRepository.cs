@@ -11,5 +11,10 @@ namespace Authentication.Infrastructure.Repositories
     public class AuthenticationRepository: GenericRepository<IdentityUser>, IAuthenticationRepository
     {
         public AuthenticationRepository(ApplicationDbContext context) : base(context) { }
+
+        public IEnumerable<IdentityUser> getAllUsers()
+        {
+            return base.All().ToList();
+        }
     }
 }

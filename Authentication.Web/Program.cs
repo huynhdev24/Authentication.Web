@@ -1,5 +1,6 @@
 
 using Authentication.Domain;
+using Authentication.Infrastructure.Unitofwork;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
@@ -46,6 +47,7 @@ namespace Authentication.Web
                 };
             });
 
+            builder.Services.AddScoped<IUnitofwork, Unitofwork>();
             // Add services to the container.
 
             builder.Services.AddControllers();

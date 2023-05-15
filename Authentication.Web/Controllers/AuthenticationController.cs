@@ -1,5 +1,6 @@
 ﻿using Authentication.Domain.Constants;
 using Authentication.Domain.Models;
+using Authentication.Infrastructure.Unitofwork;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -17,12 +18,20 @@ namespace Authentication.Web.Controllers
         private readonly UserManager<IdentityUser> _userManager;
         private readonly RoleManager<IdentityRole> _roleManager;
         private readonly IConfiguration _configuration;
-
-        public AuthenticationController(UserManager<IdentityUser> userManager, RoleManager<IdentityRole> roleManager, IConfiguration configuration)
+        private readonly IUnitofwork unitofwork;
+        public AuthenticationController(UserManager<IdentityUser> userManager, RoleManager<IdentityRole> roleManager, IConfiguration configuration, IUnitofwork unitofwork)
         {
             _userManager = userManager;
             _roleManager = roleManager;
             _configuration = configuration;
+            unitofwork = unitofwork;
+        }
+
+        [HttpGet("/user")]
+        public async Task<IActionResult> getAllUsers(IUnitofwork unitofwork)
+        {
+            var listAllUsers = unitofwork.Authentication.getAllUsers();
+            return Ok(listAllUsers);
         }
 
         [HttpPost("login")]
