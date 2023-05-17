@@ -20,7 +20,7 @@ namespace Authentication.Web.Controllers
         [Authorize]
         public async Task<IActionResult> GetAllUsers()
         {
-            var listAllUsers = unitofwork.Authentication.getAllUsers();
+            var listAllUsers = unitofwork.Authentication.GetAllUsers();
             return Ok(listAllUsers);
         }
     }
