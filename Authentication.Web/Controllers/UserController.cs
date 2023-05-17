@@ -16,9 +16,9 @@ namespace Authentication.Web.Controllers
             this.unitofwork = unitofwork;
         }
 
-        [HttpGet("/user")]
+        [HttpGet]
         [Authorize]
-        public async Task<IActionResult> getAllUsers()
+        public async Task<IActionResult> GetAllUsers()
         {
             var listAllUsers = unitofwork.Authentication.getAllUsers();
             return Ok(listAllUsers);
