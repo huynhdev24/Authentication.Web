@@ -24,11 +24,11 @@ namespace Authentication.Web.Controllers
             _userManager = userManager;
             _roleManager = roleManager;
             _configuration = configuration;
-            unitofwork = unitofwork;
+            this.unitofwork = unitofwork;
         }
 
         [HttpGet("/user")]
-        public async Task<IActionResult> getAllUsers(IUnitofwork unitofwork)
+        public async Task<IActionResult> getAllUsers()
         {
             var listAllUsers = unitofwork.Authentication.getAllUsers();
             return Ok(listAllUsers);
