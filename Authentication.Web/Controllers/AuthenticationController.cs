@@ -18,20 +18,11 @@ namespace Authentication.Web.Controllers
         private readonly UserManager<IdentityUser> _userManager;
         private readonly RoleManager<IdentityRole> _roleManager;
         private readonly IConfiguration _configuration;
-        private readonly IUnitofwork unitofwork;
-        public AuthenticationController(UserManager<IdentityUser> userManager, RoleManager<IdentityRole> roleManager, IConfiguration configuration, IUnitofwork unitofwork)
+        public AuthenticationController(UserManager<IdentityUser> userManager, RoleManager<IdentityRole> roleManager, IConfiguration configuration)
         {
             _userManager = userManager;
             _roleManager = roleManager;
             _configuration = configuration;
-            this.unitofwork = unitofwork;
-        }
-
-        [HttpGet("/user")]
-        public async Task<IActionResult> getAllUsers()
-        {
-            var listAllUsers = unitofwork.Authentication.getAllUsers();
-            return Ok(listAllUsers);
         }
 
         [HttpPost("login")]
