@@ -12,7 +12,7 @@ namespace Authentication.Infrastructure.Repositories
     {
         public AuthenticationRepository(ApplicationDbContext context) : base(context) { }
 
-        public IEnumerable<IdentityUser> GetAllUsers()
+        public async Task<IEnumerable<IdentityUser>> GetAllUsers()
         {
             return base.All().ToList();
         }

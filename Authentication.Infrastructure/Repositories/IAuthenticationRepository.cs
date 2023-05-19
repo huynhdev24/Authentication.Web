@@ -9,6 +9,6 @@ namespace Authentication.Infrastructure.Repositories
 {
     public interface IAuthenticationRepository: IGenericRepository<IdentityUser>
     {
-        IEnumerable<IdentityUser> GetAllUsers();
+        Task<IEnumerable<IdentityUser>> GetAllUsers();
     }
 }
