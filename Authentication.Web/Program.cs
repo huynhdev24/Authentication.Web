@@ -59,6 +59,20 @@ namespace Authentication.Web
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
 
+            // Add Cors
+            //var MyAllowedOrigins = "_myAllowedOrigins";
+
+            //builder.Services.AddCors(options =>
+            //{
+            //    options.AddPolicy(MyAllowedOrigins,
+            //                          builder =>
+            //                          {
+            //                              builder.WithOrigins("http://localhost:4200")
+            //                                                  .AllowAnyHeader()
+            //                                                  .AllowAnyMethod();
+            //                          });
+            //});
+
             var app = builder.Build();
 
             // Configure the HTTP request pipeline.
@@ -68,6 +82,11 @@ namespace Authentication.Web
                 app.UseSwaggerUI();
             }
 
+            // Add Cors
+            app.UseCors(x => x
+            .AllowAnyOrigin()
+            .AllowAnyMethod()
+            .AllowAnyHeader());
             app.UseHttpsRedirection();
             app.UseAuthentication();
             app.UseAuthorization();
