@@ -10,6 +10,8 @@ namespace Authentication.Infrastructure.Unitofwork
     public interface IUnitofwork: IDisposable
     {
         IAuthenticationRepository Authentication { get; }
+        ITodoRepository Todo { get; }
+        ITaskRepository Task { get; }
         void SaveChanges();
     }
 }

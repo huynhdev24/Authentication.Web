@@ -36,6 +36,16 @@ namespace Authentication.Infrastructure.Repositories
             return context.Find<T>(id);
         }
 
+        public T Get(int id)
+        {
+            return context.Find<T>(id);
+        }
+
+        public void Delete(T entity)
+        {
+            context.Remove(entity);
+        }
+
         public IEnumerable<T> All()
         {
             return context.Set<T>()
