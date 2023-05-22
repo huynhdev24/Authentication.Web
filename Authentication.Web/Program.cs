@@ -51,6 +51,15 @@ namespace Authentication.Web
                 };
             });
 
+            // Adding Google Authentication
+            builder.Services.AddAuthentication().
+                                AddGoogle(options =>
+                                {
+                                    IConfigurationSection googleAuthNSection = configuration.GetSection("Authentication:Google");
+                                    options.ClientId = googleAuthNSection["ClientId"];
+                                    options.ClientSecret = googleAuthNSection["ClientSecret"];
+                                });
+
             builder.Services.AddScoped<IUnitofwork, Unitofwork>();
             // Add services to the container.
 
