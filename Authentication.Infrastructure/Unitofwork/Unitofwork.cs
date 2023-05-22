@@ -1,4 +1,5 @@
 ﻿using Authentication.Domain;
+using Authentication.Domain.Entities;
 using Authentication.Infrastructure.Repositories;
 using Microsoft.AspNetCore.Identity;
 using System;
@@ -17,6 +18,8 @@ namespace Authentication.Infrastructure.Unitofwork
         {
             this.context = context;
             Authentication = new AuthenticationRepository(this.context);
+            Todo = new TodoRepository(this.context);
+            Task = new TaskRepository(this.context);
         }
 
         public IAuthenticationRepository Authentication
@@ -24,6 +27,19 @@ namespace Authentication.Infrastructure.Unitofwork
             get;
             private set;
         }
+
+        public ITodoRepository Todo
+        {
+            get;
+            private set;
+        }
+
+        public ITaskRepository Task
+        {
+            get;
+            private set;
+        }
+
         public void SaveChanges()
         {
             context.SaveChanges();
