@@ -6,9 +6,9 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Authentication.Web.Controllers
 {
+    [Authorize]
     [Route("api/todo")]
     [ApiController]
-    [Authorize]
     public class TodoController : ControllerBase
     {
         private readonly IUnitofwork unitofWork;
@@ -43,6 +43,7 @@ namespace Authentication.Web.Controllers
             {
                 return BadRequest("Invalid model object");
             }
+
             this.unitofWork.Todo.Add(todo);
             this.unitofWork.SaveChanges();
             return Ok(todo);
@@ -56,6 +57,7 @@ namespace Authentication.Web.Controllers
             {
                 return NotFound();
             }
+
             this.unitofWork.Todo.Delete(todo);
             this.unitofWork.SaveChanges();
             return NoContent();
@@ -72,11 +74,13 @@ namespace Authentication.Web.Controllers
             {
                 return BadRequest("Invalid model object");
             }
+
             var todoEntity = this.unitofWork.Todo.Get(id);
             if (todoEntity == null)
             {
                 return NotFound();
             }
+
             this.unitofWork.Todo.Update(todo);
             this.unitofWork.SaveChanges();
             return NoContent();
